@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AppProvaRuby</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+<%= nav_bar fixed: :top, brand: "AppProva", responsive: true do %>
+  <%= menu_group do %>
+      <%= menu_item "Home", root_path %>
+      <%= menu_item "Cadastrar Unidade", new_resultado_url %>
+      <%= menu_item "Instituições", busca_view_url %>
+      <%= menu_item "Alunos", alunos_list_url  %>
+      <%= menu_item "Cadastrar Nota", new_aluno_url %>
+  <% end %>    
+<% end %>
+    <div class="container">
+      <div class="row"><br></div>
+        <%= yield %>
+    </div>
+  </body>
+</html>

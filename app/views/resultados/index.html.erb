@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AppProva</title>
+</head>
+
+<body>
+    <%= form_tag busca_resultado_url, method: :get do %>
+      <%= link_to "Voltar", root_url, class: "btn btn-info" %>
+      <%= link_to "Cadastrar Resultado", new_resultado_path, class: "btn btn-success" %>
+      <%= button_to "Limpar Busca", nil, class: "btn btn-warning" %>
+    <% end %>
+    <div class="row">
+      <h1 class="text-center text-info">Resultados do Enade</h1>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr class="info">
+          <%= form_tag busca_resultado_url, method: :get do %>
+            <th class="text-center">  
+              Instituição
+                <%= text_field_tag :nome_instituicao, @nome_instituicao, class: "form-control" %>
+            </th>
+            <th class="text-center">
+              Nota Geral
+              <%= text_field_tag :nota_geral, @nota_geral, class: "form-control" %>
+            </th>
+            <th class="text-center">
+              Curso
+              <%= text_field_tag :nome_curso, @nome_curso, class: "form-control" %>
+            </th>
+            <th class="text-center">
+              Nota Curso
+              <%= text_field_tag :nota_curso, @nota_curso, class: "form-control" %>
+            </th>
+            <th class="text-center">
+              Media Alunos Curso
+              <%= text_field_tag :media_alunos, @media_alunos, class: "form-control" %>
+            </th>
+            <th class="text-center">
+              Ações <br>
+              <%= button_to "Buscar", nil, class: "btn btn-primary" %>
+            </th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @resultados.each do |resultado| %>
+            <tr>
+              <td>
+                <%= resultado.nome_instituicao %>
+              </td>
+              <td class="text-center">
+                <%= resultado.nota_geral %>
+              </td>
+              <td>
+                <%= resultado.nome_curso %>
+              </td>
+              <td class="text-center">
+                <%= resultado.nota_curso %>
+              </td>
+              <td class="text-center">
+                <%= resultado.media_alunos %>
+              </td>
+              <td>
+                <%= button_to "Remover", resultado, method: :delete, class: "btn btn-danger", 
+                data: { confirm: "Tem certeza que deseja remover este resultado da #{resultado.nome_instituicao}?" }%>
+              </td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div> 
+    <!-- End Row  -->
+</body>
+
+</html>

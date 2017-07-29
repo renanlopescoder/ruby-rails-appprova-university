@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AppProva</title>
+</head>
+
+<body>
+    <div class="row">
+      <h1 class="text-center text-info">Resultados do Enade</h1>
+      <table class="table">
+          <td class="text-center">
+            <h3 class="text-info">
+              Unidades Educacionais
+            </h3>
+            <%= link_to new_resultado_url, class: "btn btn-default" do %>
+                <i class="glyphicon glyphicon-plus"></i> Nova Unidade
+            <% end %>
+            <%= link_to busca_view_url, class: "btn btn-default" do %>
+                <i class="glyphicon glyphicon-search"></i> Pesquisa
+            <% end %>
+          </td>
+
+          <td class="text-center">
+            <h3 class="text-info">
+              Alunos
+            </h3>
+            <%= link_to new_aluno_url, class: "btn btn-default" do %>
+                <i class="glyphicon glyphicon-plus"></i> Novo Aluno
+            <% end %>
+            <%= link_to alunos_list_url, class: "btn btn-default" do %>
+                <i class="glyphicon glyphicon-search"></i> Pesquisa
+            <% end %>
+          </td>
+      </table>
+        <br>
+        <br>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr class="info">
+          
+            <th class="text-center">  
+              Instituição
+            </th>
+            <th class="text-center">
+              Nota Geral
+            </th>
+            <th class="text-center">
+              Curso
+            </th>
+            <th class="text-center">
+              Nota Curso
+            </th>
+            <th class="text-center">
+              Media Alunos Curso
+            </th>
+            <th class="text-center">
+              Ações
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @resultados.each do |resultado| %>
+            <tr>
+              <td>
+                <%= resultado.nome_instituicao %>
+              </td>
+              <td class="text-center">
+                <%= resultado.nota_geral %>
+              </td>
+              <td>
+                <%= resultado.nome_curso %>
+              </td>
+              <td class="text-center">
+                <%= resultado.nota_curso %>
+              </td>
+              <td class="text-center">
+                <%= resultado.media_alunos %>
+              </td>
+              <td class="text-center">
+                <%= button_to "Remover", resultado, method: :delete, class: "btn btn-danger", 
+                data: { confirm: "Tem certeza que deseja remover este resultado da #{resultado.nome_instituicao}?" }%>
+              </td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div> 
+    <!-- End Row  -->
+</body>
+
+</html>

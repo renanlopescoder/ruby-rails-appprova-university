@@ -1,0 +1,8 @@
+{
+  "name": "appprova-ruby",
+  "private": true,
+  "dependencies": {},
+  "scripts": {
+    "start": "rails server"
+  }
+}

@@ -1,0 +1,38 @@
+<%= form_with(model: aluno, local: true) do |form| %>
+  <% if aluno.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(aluno.errors.count, "error") %> prohibited this aluno from being saved:</h2>
+
+      <ul>
+      <% aluno.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nome_aluno %>
+    <%= form.text_field :nome_aluno, id: :aluno_nome_aluno %>
+  </div>
+
+  <div class="field">
+    <%= form.label :instituicao %>
+    <%= form.collection_select :instituicao_id, @resultados, :id, :nome_instituicao, {}, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nota_aluno %>
+    <%= form.text_field :nota_aluno, id: :aluno_nota_aluno %>
+  </div>
+
+  <div class="field">
+    <%= form.label :curso %>
+    <%= form.collection_select :curso, @resultados, :nome_curso, :nome_curso, {}, class: "form-control" %>
+  </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
