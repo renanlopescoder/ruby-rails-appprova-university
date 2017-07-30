@@ -53,7 +53,7 @@ class AlunosController < ApplicationController
     # @instituicoes.nota_geral = @instituicoes.sum('media_alunos') / @instituicoes.size
     # @instituicoes.save
     
-    redirect_to alunos_list_url
+    redirect_to root_url
   end
 
   def update
