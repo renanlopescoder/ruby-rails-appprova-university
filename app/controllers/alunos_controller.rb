@@ -1,36 +1,61 @@
 class AlunosController < ApplicationController
-  before_action :set_aluno, only: [:show, :edit, :update, :destroy]
+  
 
-  # GET /alunos
-  # GET /alunos.json
   def index
     @alunos = Aluno.all
+    @resultados = Resultado.all
   end
 
-  # GET /alunos/1
-  # GET /alunos/1.json
-  def show
+  def busca
+    @resultados = Resultado.all
+    @nome_aluno = params[:nome_aluno]
+    @nota_aluno = params[:nota_aluno]
+    @curso = params[:curso]
+    @alunos = Aluno.where "nome_aluno like ? and CAST(nota_aluno as text) like ? and CAST(curso as text) like ? ", "%#{@nome_aluno}%", "%#{@nota_aluno}%", "%#{@curso}%"
   end
 
-  # GET /alunos/new
   def new
     @aluno = Aluno.new
     @resultados = Resultado.all
   end
 
-  # GET /alunos/1/edit
-  def edit
-  end
-
-
   def create
-    valores = params.require("aluno").permit :nome_aluno, :instituicao_id, :nota_aluno, :curso
-    aluno = Aluno.create valores
-    redirect_to root_url
+    @aluno = Aluno.new
+    
+
+    @aluno.nome_aluno = params[:nome_aluno]
+    @aluno.nota_aluno = params[:nota_aluno]
+    
+    @instituicao_curso = params[:instituicao_id]
+
+    @aluno.instituicao_id = @instituicao_curso
+    # Guardando instituicao para calculo de resultados e pegar nome do curso
+    @resultado_curso = Resultado.find(@instituicao_curso)
+    @aluno.nome_unidade = @resultado_curso.nome_instituicao
+
+    @aluno.curso = @resultado_curso.nome_curso
+    @aluno.save
+    # Calculando media alunos curso
+
+
+    
+    @notas_dos_alunos = Aluno.where "instituicao_id = ?", @instituicao_curso
+
+    # Nome da instituição para calculo de nota geral
+    @nome_da_instituicao = @resultado_curso.nome_instituicao
+
+    @resultado_curso.media_alunos = @notas_dos_alunos.sum('nota_aluno') / @notas_dos_alunos.size
+    @resultado_curso.save
+
+
+    # Calculando nota Geral da Instituição
+    # @instituicoes = Resultado.where "nome_instituicao like ?", @nome_da_instituicao
+    # @instituicoes.nota_geral = @instituicoes.sum('media_alunos') / @instituicoes.size
+    # @instituicoes.save
+    
+    redirect_to alunos_list_url
   end
 
-  # PATCH/PUT /alunos/1
-  # PATCH/PUT /alunos/1.json
   def update
     respond_to do |format|
       if @aluno.update(aluno_params)
@@ -43,24 +68,10 @@ class AlunosController < ApplicationController
     end
   end
 
-  # DELETE /alunos/1
-  # DELETE /alunos/1.json
   def destroy
-    @aluno.destroy
-    respond_to do |format|
-      format.html { redirect_to alunos_url, notice: 'Aluno was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    id = params[:id]
+    Aluno.destroy id
+    redirect_to root_url
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_aluno
-      @aluno = Aluno.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def aluno_params
-      params.require(:aluno).permit(:nome_aluno, :instituicao, :nota_aluno, :curso)
-    end
 end

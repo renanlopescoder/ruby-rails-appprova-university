@@ -8,24 +8,24 @@
 </head>
 <body>
   <h1 class="text-info text-center">Cadastro de aluno</h1>
-  <%= form_for Aluno.new do |f| %>
+  <%= form_for @aluno do |f| %>
     <div class="form-group">
       <label>Nome do Aluno</label>
-      <input class="form-control" type="text" name="aluno[nome_aluno]">
+      <input class="form-control" type="text" name="nome_aluno">
     </div>
     <div class="form-group">
       <label>Nota</label>
-      <input class="form-control" type="number" name="aluno[nota_aluno]" step="0.01">
+      <input class="form-control" type="number" name="nota_aluno" step="0.01">
     </div>
     <div class="form-group">
       <label>Instituição</label>
-      <%= f.collection_select :instituicao_id, @resultados, :id, :nome_instituicao, {}, class: "form-control" %>
+      <select name="instituicao_id" class="form-control">
+        <% @resultados.each do |resultado| %>
+          <option value="<%= resultado.id %>"><%= resultado.nome_instituicao %> - <%= resultado.nome_curso %></option>
+        <% end %>
+      </select>
     </div>
-    <div class="form-group">
-      <label>Curso</label>
-     <input class="form-control" type="text" name="aluno[curso]">
-    </div>
-    <%= link_to "Cancelar", root_url, class: "btn btn-warning" %>
+    <%= link_to "Cancelar", root_url, class: "btn btn-default" %>
     <button class="btn btn-success" type="submit">Salvar</button>
   <% end %>
 </body>

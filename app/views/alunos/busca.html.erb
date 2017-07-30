@@ -1,0 +1,60 @@
+<h1 class="text-center text-info">Alunos</h1>
+<div class="row text-center">
+      <%= link_to "Voltar", root_url, class: "btn btn-default" %>
+      <%= link_to new_aluno_url, class: "btn btn-default" do %>
+          <i class="glyphicon glyphicon-plus"></i> Novo Aluno
+      <% end %>
+      <br>
+      <br>
+</div>
+<div class="row">
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nome do Aluno</th>
+      <th>Instituição</th>
+      <th>Nota</th>
+      <th>Curso</th>
+      <th colspan="3"></th>
+    </tr>
+          <%= form_tag busca_aluno_url, method: :get do |f| %>
+            <th class="text-center">  
+              Nome do Aluno
+              <%= text_field_tag :nome_aluno, @nome_aluno, class: "form-control" %>
+            </th>
+            <th class="text-center">
+              Instituição
+              <input class="form-control" type="number" disabled>
+            </th>
+            <th class="text-center">
+              Curso
+              <%= text_field_tag :curso, @curso, class: "form-control" %>
+            </th>
+            <th class="text-center">
+              Nota Aluno
+              <%= text_field_tag :nota_aluno, @nota_aluno, class: "form-control" %>
+            </th>
+            <th class="text-center">
+              Ações <br>
+              <%= button_to "Buscar", nil, class: "btn btn-primary" %>
+            </th>
+            <% end %>
+
+  </thead>
+
+  <tbody>
+    <% @alunos.each do |aluno| %>
+      <tr>
+        <td><%= aluno.nome_aluno %></td>
+        <td><%= Resultado.find(aluno.instituicao_id).nome_instituicao %></td>
+        <td><%= aluno.curso %></td>
+        <td><%= aluno.nota_aluno %></td>
+        <td><%= button_to "Remover", aluno, 
+                        method: :delete, 
+                        class: "btn btn-danger", 
+                        data: { confirm: "Tem certeza que deseja remover?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

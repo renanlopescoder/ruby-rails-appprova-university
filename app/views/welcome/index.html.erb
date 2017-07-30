@@ -16,24 +16,24 @@
             <h3 class="text-info">
               Unidades Educacionais
             </h3>
-            <%= link_to new_resultado_url, class: "btn btn-default" do %>
-                <i class="glyphicon glyphicon-plus"></i> Nova Unidade
-            <% end %>
-            <%= link_to busca_view_url, class: "btn btn-default" do %>
-                <i class="glyphicon glyphicon-search"></i> Pesquisa
-            <% end %>
+            <form action="/resultados/busca" method="get">
+              <%= link_to new_resultado_path, class: "btn btn-default" do %>
+                  <i class="glyphicon glyphicon-plus"></i> Nova Unidade
+              <% end %>            
+              <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Pesquisa</button>
+            </form>
           </td>
 
           <td class="text-center">
             <h3 class="text-info">
               Alunos
             </h3>
-            <%= link_to new_aluno_url, class: "btn btn-default" do %>
-                <i class="glyphicon glyphicon-plus"></i> Novo Aluno
-            <% end %>
-            <%= link_to alunos_list_url, class: "btn btn-default" do %>
-                <i class="glyphicon glyphicon-search"></i> Pesquisa
-            <% end %>
+            <form action="/alunos/busca" method="get">
+              <%= link_to new_aluno_path, class: "btn btn-default" do %>
+                  <i class="glyphicon glyphicon-plus"></i> Novo Aluno
+              <% end %>
+              <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Pesquisa</button>
+            </form>
           </td>
       </table>
         <br>
@@ -57,9 +57,6 @@
             <th class="text-center">
               Media Alunos Curso
             </th>
-            <th class="text-center">
-              Ações
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -69,7 +66,11 @@
                 <%= resultado.nome_instituicao %>
               </td>
               <td class="text-center">
-                <%= resultado.nota_geral %>
+              <%  
+                  @notas = @alunos.where "nome_unidade like ?", resultado.nome_instituicao
+                  @nota = @notas.sum('nota_aluno') / @notas.size 
+              %>
+              <%= @nota %>
               </td>
               <td>
                 <%= resultado.nome_curso %>
@@ -80,10 +81,7 @@
               <td class="text-center">
                 <%= resultado.media_alunos %>
               </td>
-              <td class="text-center">
-                <%= button_to "Remover", resultado, method: :delete, class: "btn btn-danger", 
-                data: { confirm: "Tem certeza que deseja remover este resultado da #{resultado.nome_instituicao}?" }%>
-              </td>
+              
             </tr>
             <% end %>
         </tbody>

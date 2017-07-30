@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20170729131910) do
 
   create_table "alunos", force: :cascade do |t|
     t.integer "instituicao_id"
+    t.string "nome_unidade"
     t.string "nome_aluno"
     t.decimal "nota_aluno"
     t.string "curso"

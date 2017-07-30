@@ -9,13 +9,14 @@
 </head>
 
 <body>
-    <%= form_tag busca_resultado_path, method: :get do %>
-      <%= link_to "Voltar", root_url, class: "btn btn-info" %>
-      <%= link_to "Cadastrar Resultado", new_resultado_path, class: "btn btn-success" %>
-      <%= button_to "Limpar Busca", nil, class: "btn btn-warning" %>
-    <% end %>
     <div class="row">
       <h1 class="text-center text-info">Resultados do Enade</h1>
+      <div class="text-center">
+        <%= link_to "Voltar", root_url, class: "btn btn-default" %>
+        <%= link_to "Cadastrar Resultado", new_resultado_path, class: "btn btn-default" %>
+        <br>
+        <br>
+      </div>
       <table class="table table-bordered table-striped">
         <thead>
           <tr class="info">
@@ -54,7 +55,11 @@
                 <%= resultado.nome_instituicao %>
               </td>
               <td class="text-center">
-                <%= resultado.nota_geral %>
+                <%  
+                    @notas = @alunos.where "nome_unidade like ?", resultado.nome_instituicao
+                    @nota = @notas.sum('nota_aluno') / @notas.size 
+                %>
+                <%= @nota %>
               </td>
               <td>
                 <%= resultado.nome_curso %>
@@ -65,10 +70,8 @@
               <td class="text-center">
                 <%= resultado.media_alunos %>
               </td>
-              <td>
-                <%= button_to "Remover", resultado, method: :delete, class: "btn btn-danger", 
-                data: { confirm: "Tem certeza que deseja remover este resultado da #{resultado.nome_instituicao}?" }%>
-              </td>
+               <td>
+              </td> 
             </tr>
             <% end %>
         </tbody>
