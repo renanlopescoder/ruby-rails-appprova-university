@@ -14,21 +14,11 @@
       <input class="form-control" type="text" name="resultado[nome_instituicao]">
     </div>
     <div class="form-group">
-      <label>Nota Geral</label>
-      <input class="form-control" type="number" name="resultado[nota_geral]" step="0.01">
-    </div>
-    <div class="form-group">
       <label>Nome do Curso</label>
       <input type="text" class="form-control" name="resultado[nome_curso]">
     </div>
-    <div class="form-group">
-      <label>Nota do Curso</label>
-      <input type="number" class="form-control" name="resultado[nota_curso]" step="0.01">
-    </div>
-    <div class="form-group">
-      <label>Média dos Alunos</label>
-      <input type="number" class="form-control" name="resultado[media_alunos]" step="0.01">
-    </div>
+      <input type="number" hidden name="resultado[media_alunos]" step="0.01" value="0.0">
+      <input hidden type="number" name="resultado[nota_geral]" step="0.01" value="0.0">
     <%= link_to "Cancelar", root_url, class: "btn btn-default" %>
     <button class="btn btn-success" type="submit">Salvar</button>
   <% end %>

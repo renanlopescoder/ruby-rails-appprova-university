@@ -22796,3 +22796,319 @@ Processing by WelcomeController#index as HTML
 Completed 200 OK in 1441ms (Views: 260.5ms | ActiveRecord: 1175.2ms)
 
 
+  [1m[35m (467.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (220.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (435.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4845337686280112595);[0m
+  [1m[35m (1287.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateResultados (20170728202013)
+  [1m[35m (191.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (236.1ms)[0m  [1m[35mCREATE TABLE "resultados" ("id" bigserial primary key, "nome_instituicao" character varying, "nota_geral" decimal, "nome_curso" character varying, "media_alunos" decimal, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (302.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170728202013"]]
+  [1m[35m (356.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAlunos (20170729131910)
+  [1m[35m (145.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (156.0ms)[0m  [1m[35mCREATE TABLE "alunos" ("id" bigserial primary key, "instituicao_id" integer, "nome_unidade" character varying, "nome_aluno" character varying, "nota_aluno" decimal, "curso" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (167.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170729131910"]]
+  [1m[35m (191.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (320.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (183.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (153.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-07-31 11:20:03.267267"], ["updated_at", "2017-07-31 11:20:03.267267"]]
+  [1m[35m (227.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (141.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4845337686280112595)[0m
+  [1m[35m (318.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:22:11 -0300
+  [1m[35m (218.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (298.4ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  Rendered welcome/index.html.erb within layouts/application (475.6ms)
+Completed 200 OK in 903ms (Views: 401.9ms | ActiveRecord: 466.3ms)
+
+
+Started GET "/resultados/new" for 127.0.0.1 at 2017-07-31 08:22:45 -0300
+Processing by ResultadosController#new as HTML
+  Rendering resultados/new.html.erb within layouts/application
+  Rendered resultados/new.html.erb within layouts/application (2589.1ms)
+Completed 200 OK in 2701ms (Views: 1436.8ms | ActiveRecord: 1258.8ms)
+
+
+Started POST "/resultados" for 127.0.0.1 at 2017-07-31 08:22:59 -0300
+Processing by ResultadosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WwIgD3QSQSjw9Kz/rbX01U7Yhf9iOWJs5d1kphonDGj/2502cuGHl3IbM7bTmFgz7x3neSHiIIpgk5LE8xNzog==", "resultado"=>{"nome_instituicao"=>"Unicesumar", "nome_curso"=>"Engenharia de Software"}}
+  [1m[35m (144.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (145.1ms)[0m  [1m[32mINSERT INTO "resultados" ("nome_instituicao", "nome_curso", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome_instituicao", "Unicesumar"], ["nome_curso", "Engenharia de Software"], ["created_at", "2017-07-31 11:22:59.784722"], ["updated_at", "2017-07-31 11:22:59.784722"]]
+  [1m[35m (143.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 584ms (ActiveRecord: 433.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:23:00 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (145.9ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  [1m[35m (316.6ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (144.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  Rendered welcome/index.html.erb within layouts/application (929.1ms)
+Completed 200 OK in 1034ms (Views: 268.4ms | ActiveRecord: 760.6ms)
+
+
+Started GET "/resultados/new" for 127.0.0.1 at 2017-07-31 08:23:37 -0300
+Processing by ResultadosController#new as HTML
+  Rendering resultados/new.html.erb within layouts/application
+  Rendered resultados/new.html.erb within layouts/application (523.8ms)
+Completed 200 OK in 591ms (Views: 248.0ms | ActiveRecord: 339.1ms)
+
+
+Started POST "/resultados" for 127.0.0.1 at 2017-07-31 08:24:03 -0300
+Processing by ResultadosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2yXfENRxrlorR+LX6yVm3a0117zAJ2he26T7lUNdN1B//GIp0oJo5amofZ6VCMo7DPC1OoP8Krhe6g33qmlImg==", "resultado"=>{"nome_instituicao"=>"FAMEC", "nome_curso"=>"Engenharia de Controle e Automação"}}
+  [1m[35m (145.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (144.6ms)[0m  [1m[32mINSERT INTO "resultados" ("nome_instituicao", "nome_curso", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome_instituicao", "FAMEC"], ["nome_curso", "Engenharia de Controle e Automação"], ["created_at", "2017-07-31 11:24:03.374799"], ["updated_at", "2017-07-31 11:24:03.374799"]]
+  [1m[35m (153.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 597ms (ActiveRecord: 443.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:24:03 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (160.3ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  [1m[35m (156.4ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (160.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (164.5ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (153.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  Rendered welcome/index.html.erb within layouts/application (1129.2ms)
+Completed 200 OK in 1198ms (Views: 226.9ms | ActiveRecord: 963.8ms)
+
+
+Started GET "/resultados/new" for 127.0.0.1 at 2017-07-31 08:25:48 -0300
+Processing by ResultadosController#new as HTML
+  Rendering resultados/new.html.erb within layouts/application
+  Rendered resultados/new.html.erb within layouts/application (176.7ms)
+Completed 200 OK in 251ms (Views: 246.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/resultados" for 127.0.0.1 at 2017-07-31 08:25:57 -0300
+Processing by ResultadosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wgx8DOcbBiMpNWNrSDkALx4yLkA4D2+Qanj+LHYJtCtm1cE14ejAnKva/CI2FKzJv/dMxnvULXbvNghOnz3L4Q==", "resultado"=>{"nome_instituicao"=>"Teste", "nome_curso"=>"Teste"}}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `nota_geral=' for #<ActionController::Parameters:0x007fc005378558>):
+  
+app/controllers/resultados_controller.rb:11:in `create'
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:26:31 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (184.1ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  [1m[35m (210.6ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (186.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (154.4ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (153.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  Rendered welcome/index.html.erb within layouts/application (1081.0ms)
+Completed 200 OK in 1192ms (Views: 290.7ms | ActiveRecord: 889.1ms)
+
+
+Started GET "/resultados/new" for 127.0.0.1 at 2017-07-31 08:26:35 -0300
+Processing by ResultadosController#new as HTML
+  Rendering resultados/new.html.erb within layouts/application
+  Rendered resultados/new.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 62ms (Views: 58.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/resultados" for 127.0.0.1 at 2017-07-31 08:26:37 -0300
+Processing by ResultadosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"fpNy663c1rYH0s8oJkv6vU94oeX+RJM/oo6ZDc7IQePaSs/Sqy8QCYU9UGFYZlZb7r3DY72f0dknwG9vJ/w+KQ==", "resultado"=>{"nome_instituicao"=>"re", "nome_curso"=>"re"}}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `resultado' for #<ActionController::Parameters:0x007fc00c8015a0>):
+  
+app/controllers/resultados_controller.rb:11:in `create'
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:26:41 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (146.7ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  [1m[35m (142.4ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (142.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (142.9ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (142.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  Rendered welcome/index.html.erb within layouts/application (867.9ms)
+Completed 200 OK in 969ms (Views: 235.7ms | ActiveRecord: 717.2ms)
+
+
+Started GET "/resultados/new" for 127.0.0.1 at 2017-07-31 08:29:03 -0300
+Processing by ResultadosController#new as HTML
+  Rendering resultados/new.html.erb within layouts/application
+  Rendered resultados/new.html.erb within layouts/application (719.8ms)
+Completed 200 OK in 836ms (Views: 299.3ms | ActiveRecord: 527.7ms)
+
+
+Started GET "/resultados/new" for 127.0.0.1 at 2017-07-31 08:29:05 -0300
+Processing by ResultadosController#new as HTML
+  Rendering resultados/new.html.erb within layouts/application
+  Rendered resultados/new.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 170ms (Views: 164.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/resultados" for 127.0.0.1 at 2017-07-31 08:29:08 -0300
+Processing by ResultadosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yrQsSt4vuFV1340OyxBSvIaM8oSEjrwOQWXpfItBeQTMB42FOmrf6tT1+66quJ8/qExLwfeJ2GCNWjs1Kp35ow==", "resultado"=>{"nome_instituicao"=>"RE", "nome_curso"=>"RE", "media_alunos"=>"0.0", "nota_geral"=>"0.0"}}
+  [1m[35m (140.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (147.8ms)[0m  [1m[32mINSERT INTO "resultados" ("nome_instituicao", "nota_geral", "nome_curso", "media_alunos", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["nome_instituicao", "RE"], ["nota_geral", "0.0"], ["nome_curso", "RE"], ["media_alunos", "0.0"], ["created_at", "2017-07-31 11:29:09.201180"], ["updated_at", "2017-07-31 11:29:09.201180"]]
+  [1m[35m (148.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 608ms (ActiveRecord: 437.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:29:09 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (155.4ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  [1m[35m (155.9ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (165.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (160.0ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (155.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (187.2ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (257.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  Rendered welcome/index.html.erb within layouts/application (1592.7ms)
+Completed 200 OK in 1709ms (Views: 296.9ms | ActiveRecord: 1403.2ms)
+
+
+Started GET "/resultados/busca" for 127.0.0.1 at 2017-07-31 08:30:00 -0300
+Processing by ResultadosController#busca as HTML
+  Rendering resultados/busca.html.erb within layouts/application
+  [1m[36mResultado Load (144.9ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" WHERE (nome_instituicao like '%%' and CAST(nota_geral as text) like '%%' and nome_curso like '%%' and CAST(media_alunos as text) like '%%') ORDER BY nota_geral DESC[0m
+  [1m[35m (142.5ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (142.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  Rendered resultados/busca.html.erb within layouts/application (439.1ms)
+Completed 200 OK in 768ms (Views: 89.9ms | ActiveRecord: 429.4ms)
+
+
+Started GET "/resultados/new" for 127.0.0.1 at 2017-07-31 08:30:07 -0300
+Processing by ResultadosController#new as HTML
+  Rendering resultados/new.html.erb within layouts/application
+  Rendered resultados/new.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 99ms (Views: 94.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/resultados" for 127.0.0.1 at 2017-07-31 08:30:09 -0300
+Processing by ResultadosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"s3/7G0siTVh07opYKD/OO8vUpl+H4E9L8sC916cPUyoXpkYiTdGL5/YBFRFWEmLdahHE2cQ7Da13jku1Tjss4A==", "resultado"=>{"nome_instituicao"=>"e", "nome_curso"=>"e", "media_alunos"=>"0.0", "nota_geral"=>"0.0"}}
+  [1m[35m (153.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (159.7ms)[0m  [1m[32mINSERT INTO "resultados" ("nome_instituicao", "nota_geral", "nome_curso", "media_alunos", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["nome_instituicao", "e"], ["nota_geral", "0.0"], ["nome_curso", "e"], ["media_alunos", "0.0"], ["created_at", "2017-07-31 11:30:09.671106"], ["updated_at", "2017-07-31 11:30:09.671106"]]
+  [1m[35m (185.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 662ms (ActiveRecord: 497.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:30:10 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (142.3ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  [1m[35m (141.9ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (170.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (163.0ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (150.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (175.5ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (145.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (147.1ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  [1m[35m (144.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  Rendered welcome/index.html.erb within layouts/application (1533.1ms)
+Completed 200 OK in 1597ms (Views: 212.6ms | ActiveRecord: 1379.6ms)
+
+
+Started GET "/resultados/busca" for 127.0.0.1 at 2017-07-31 08:30:14 -0300
+Processing by ResultadosController#busca as HTML
+  Rendering resultados/busca.html.erb within layouts/application
+  [1m[36mResultado Load (156.9ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" WHERE (nome_instituicao like '%%' and CAST(nota_geral as text) like '%%' and nome_curso like '%%' and CAST(media_alunos as text) like '%%') ORDER BY nota_geral DESC[0m
+  [1m[35m (153.7ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (154.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (154.9ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  [1m[35m (183.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  Rendered resultados/busca.html.erb within layouts/application (813.5ms)
+Completed 200 OK in 1088ms (Views: 73.6ms | ActiveRecord: 803.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:30:19 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (144.8ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  [1m[35m (142.2ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (154.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (148.2ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (179.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (146.6ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (141.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (141.5ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  [1m[35m (169.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  Rendered welcome/index.html.erb within layouts/application (1559.8ms)
+Completed 200 OK in 1629ms (Views: 252.4ms | ActiveRecord: 1368.5ms)
+
+
+Started GET "/alunos/busca" for 127.0.0.1 at 2017-07-31 08:30:22 -0300
+Processing by AlunosController#busca as HTML
+  Rendering alunos/busca.html.erb within layouts/application
+  [1m[36mAluno Load (155.4ms)[0m  [1m[34mSELECT "alunos".* FROM "alunos" WHERE (nome_aluno like '%%' and CAST(nota_aluno as text) like '%%' and CAST(curso as text) like '%%' )[0m
+  Rendered alunos/busca.html.erb within layouts/application (161.2ms)
+Completed 200 OK in 393ms (Views: 74.3ms | ActiveRecord: 155.4ms)
+
+
+Started GET "/alunos/new" for 127.0.0.1 at 2017-07-31 08:30:24 -0300
+Processing by AlunosController#new as HTML
+  Rendering alunos/new.html.erb within layouts/application
+  [1m[36mResultado Load (140.0ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados"[0m
+  Rendered alunos/new.html.erb within layouts/application (147.1ms)
+Completed 200 OK in 717ms (Views: 120.5ms | ActiveRecord: 433.1ms)
+
+
+Started POST "/alunos" for 127.0.0.1 at 2017-07-31 08:30:29 -0300
+Processing by AlunosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6Ch+jRwAFn0K2Atu1xfX/e913DSLduCGRcXvczquysJ8xFPocAcOFt8xTrJ3oHVovFJW3wGvnqTZ6sycgnYaog==", "nome_aluno"=>"te", "nota_aluno"=>"10", "instituicao_id"=>"1"}
+  [1m[36mResultado Load (153.0ms)[0m  [1m[34mSELECT  "resultados".* FROM "resultados" WHERE "resultados"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (151.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (174.0ms)[0m  [1m[32mINSERT INTO "alunos" ("instituicao_id", "nome_unidade", "nome_aluno", "nota_aluno", "curso", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["instituicao_id", 1], ["nome_unidade", "Unicesumar"], ["nome_aluno", "te"], ["nota_aluno", "10.0"], ["curso", "Engenharia de Software"], ["created_at", "2017-07-31 11:30:30.464836"], ["updated_at", "2017-07-31 11:30:30.464836"]]
+  [1m[35m (151.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (154.0ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (instituicao_id = '1')[0m
+  [1m[35m (153.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (instituicao_id = '1')[0m
+  [1m[35m (150.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (182.6ms)[0m  [1m[33mUPDATE "resultados" SET "media_alunos" = $1, "updated_at" = $2 WHERE "resultados"."id" = $3[0m  [["media_alunos", "10.0"], ["updated_at", "2017-07-31 11:30:31.257438"], ["id", 1]]
+  [1m[35m (155.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 1930ms (ActiveRecord: 1582.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:30:31 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (142.1ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  [1m[35m (152.1ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (140.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (143.7ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (139.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (145.4ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (142.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (147.8ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  [1m[35m (169.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  Rendered welcome/index.html.erb within layouts/application (1476.7ms)
+Completed 200 OK in 1534ms (Views: 207.5ms | ActiveRecord: 1323.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-07-31 08:32:08 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mResultado Load (158.5ms)[0m  [1m[34mSELECT "resultados".* FROM "resultados" ORDER BY nota_geral DESC[0m
+  [1m[35m (154.5ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (196.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'FAMEC')[0m
+  [1m[35m (153.7ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (155.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'Unicesumar')[0m
+  [1m[35m (158.8ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (167.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'RE')[0m
+  [1m[35m (158.0ms)[0m  [1m[34mSELECT SUM("alunos"."nota_aluno") FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  [1m[35m (155.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "alunos" WHERE (nome_unidade like 'e')[0m
+  Rendered welcome/index.html.erb within layouts/application (1635.5ms)
+Completed 200 OK in 1711ms (Views: 245.1ms | ActiveRecord: 1458.1ms)
+
+

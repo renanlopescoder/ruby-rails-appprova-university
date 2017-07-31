@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20170729131910) do
     t.string "nome_instituicao"
     t.decimal "nota_geral"
     t.string "nome_curso"
-    t.decimal "nota_curso"
     t.decimal "media_alunos"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

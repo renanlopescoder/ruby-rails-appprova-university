@@ -34,10 +34,6 @@
               <%= text_field_tag :nome_curso, @nome_curso, class: "form-control" %>
             </th>
             <th class="text-center">
-              Nota Curso
-              <%= text_field_tag :nota_curso, @nota_curso, class: "form-control" %>
-            </th>
-            <th class="text-center">
               Media Alunos Curso
               <%= text_field_tag :media_alunos, @media_alunos, class: "form-control" %>
             </th>
@@ -63,9 +59,6 @@
               </td>
               <td>
                 <%= resultado.nome_curso %>
-              </td>
-              <td class="text-center">
-                <%= resultado.nota_curso %>
               </td>
               <td class="text-center">
                 <%= resultado.media_alunos %>
