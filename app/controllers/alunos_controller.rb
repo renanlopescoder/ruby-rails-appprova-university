@@ -24,7 +24,6 @@ class AlunosController < ApplicationController
     
 
     @aluno.nome_aluno = params[:nome_aluno]
-    @aluno.nota_aluno = params[:nota_aluno]
     
     @instituicao_curso = params[:instituicao_id]
 
@@ -34,7 +33,12 @@ class AlunosController < ApplicationController
     @aluno.nome_unidade = @resultado_curso.nome_instituicao
 
     @aluno.curso = @resultado_curso.nome_curso
-    @aluno.save
+    @aluno.nota_aluno = params[:nota_aluno].to_f
+
+    if @aluno.nota_aluno > 10.0
+      @aluno.nota_aluno  = 10.0
+    end
+      @aluno.save
     # Calculando media alunos curso
 
 
