@@ -67,13 +67,13 @@
                   @notas = @alunos.where "nome_unidade like ?", resultado.nome_instituicao
                   @nota = @notas.sum('nota_aluno') / @notas.size 
               %>
-              <%= @nota %>
+              <%= @nota.round(2) %>
               </td>
               <td>
                 <%= resultado.nome_curso %>
               </td>
               <td class="text-center">
-                <%= resultado.media_alunos %>
+                <%= resultado.media_alunos.round(2) %>
               </td>
               
             </tr>
